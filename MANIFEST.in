@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include sayaab *.css
+recursive-include sayaab *.csv
+recursive-include sayaab *.html
+recursive-include sayaab *.ico
+recursive-include sayaab *.js
+recursive-include sayaab *.json
+recursive-include sayaab *.md
+recursive-include sayaab *.png
+recursive-include sayaab *.py
+recursive-include sayaab *.svg
+recursive-include sayaab *.txt
+recursive-exclude sayaab *.pyc
