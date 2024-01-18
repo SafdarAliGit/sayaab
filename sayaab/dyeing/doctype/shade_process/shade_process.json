@@ -99,27 +99,33 @@
    "options": "Shade Process Account"
   },
   {
+   "default": "0",
    "fieldname": "chemical_cost",
    "fieldtype": "Currency",
-   "label": "Chemical Cost"
+   "label": "Chemical Cost",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_8rrni",
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
    "fieldname": "overhead_cost",
    "fieldtype": "Currency",
-   "label": "Overhead Cost"
+   "label": "Overhead Cost",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_uffyt",
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
    "fieldname": "grand_total",
    "fieldtype": "Currency",
-   "label": "Grand Total"
+   "label": "Grand Total",
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -138,7 +144,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-18 17:18:04.834563",
+ "modified": "2024-01-18 19:59:46.592358",
  "modified_by": "Administrator",
  "module": "Dyeing",
  "name": "Shade Process",
