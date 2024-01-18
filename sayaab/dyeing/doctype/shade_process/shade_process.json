@@ -18,6 +18,7 @@
   "ref_shade_no",
   "pantone_no",
   "light_source",
+  "service_item",
   "section_break_envmz",
   "shade_process_item",
   "over_head_cost",
@@ -139,12 +140,18 @@
   {
    "fieldname": "section_break_ywtmq",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "service_item",
+   "fieldtype": "Link",
+   "label": "Service item",
+   "options": "Item"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-18 21:19:41.025023",
+ "modified": "2024-01-18 21:33:58.005273",
  "modified_by": "Administrator",
  "module": "Dyeing",
  "name": "Shade Process",

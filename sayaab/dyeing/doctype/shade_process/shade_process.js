@@ -2,9 +2,16 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Shade Process', {
-    // refresh: function(frm) {
+    refresh: function(frm) {
+          frm.set_query("service_item", function () {
+            return {
+                filters: [
+                    ["Item", "item_group", "=", "Services"]
+                ]
+            };
+        });
+    }
 
-    // }
 });
 
 function total_chemical_cost(frm) {
