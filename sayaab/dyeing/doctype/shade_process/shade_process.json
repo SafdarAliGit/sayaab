@@ -1,20 +1,19 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:shade_no",
+ "autoname": "format:SN-{########}",
  "creation": "2024-01-18 08:28:49.918195",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "shade_no",
   "customer",
   "combo_name",
   "fabric",
   "content",
-  "column_break_xfp7p",
   "operation",
+  "column_break_xfp7p",
   "date",
   "ref_shade_no",
   "pantone_no",
@@ -31,14 +30,6 @@
   "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "shade_no",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Shade No",
-   "reqd": 1,
-   "unique": 1
-  },
   {
    "fieldname": "customer",
    "fieldtype": "Link",
@@ -147,11 +138,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-18 08:32:33.523506",
+ "modified": "2024-01-18 17:10:24.566993",
  "modified_by": "Administrator",
  "module": "Dyeing",
  "name": "Shade Process",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
