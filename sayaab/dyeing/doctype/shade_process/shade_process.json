@@ -1,0 +1,173 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:shade_no",
+ "creation": "2024-01-18 08:28:49.918195",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "shade_no",
+  "customer",
+  "combo_name",
+  "fabric",
+  "content",
+  "column_break_xfp7p",
+  "operation",
+  "date",
+  "ref_shade_no",
+  "pantone_no",
+  "light_source",
+  "section_break_envmz",
+  "shade_process_item",
+  "over_head_cost",
+  "section_break_ywtmq",
+  "chemical_cost",
+  "column_break_8rrni",
+  "overhead_cost",
+  "column_break_uffyt",
+  "grand_total",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "shade_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shade No",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "combo_name",
+   "fieldtype": "Data",
+   "label": "Combo Name"
+  },
+  {
+   "fieldname": "fabric",
+   "fieldtype": "Data",
+   "label": "Fabric"
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Data",
+   "label": "Content"
+  },
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "options": "Operation"
+  },
+  {
+   "fieldname": "column_break_xfp7p",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "ref_shade_no",
+   "fieldtype": "Data",
+   "label": "Ref Shade No "
+  },
+  {
+   "fieldname": "pantone_no",
+   "fieldtype": "Data",
+   "label": "Pantone No"
+  },
+  {
+   "fieldname": "light_source",
+   "fieldtype": "Data",
+   "label": "Light Source"
+  },
+  {
+   "fieldname": "section_break_envmz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "shade_process_item",
+   "fieldtype": "Table",
+   "label": "Shade Process Item",
+   "options": "Shade Process Item"
+  },
+  {
+   "fieldname": "over_head_cost",
+   "fieldtype": "Table",
+   "label": "Over Head Cost",
+   "options": "Shade Process Account"
+  },
+  {
+   "fieldname": "chemical_cost",
+   "fieldtype": "Currency",
+   "label": "Chemical Cost"
+  },
+  {
+   "fieldname": "column_break_8rrni",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "overhead_cost",
+   "fieldtype": "Currency",
+   "label": "Overhead Cost"
+  },
+  {
+   "fieldname": "column_break_uffyt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Shade Process",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ywtmq",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-01-18 08:32:33.523506",
+ "modified_by": "Administrator",
+ "module": "Dyeing",
+ "name": "Shade Process",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
