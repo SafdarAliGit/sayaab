@@ -113,7 +113,8 @@
    "default": "0",
    "fieldname": "overhead_cost",
    "fieldtype": "Currency",
-   "label": "Overhead Cost"
+   "label": "Overhead Cost",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_uffyt",
@@ -143,7 +144,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-18 21:14:32.489935",
+ "modified": "2024-01-18 21:19:41.025023",
  "modified_by": "Administrator",
  "module": "Dyeing",
  "name": "Shade Process",
