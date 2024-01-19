@@ -2,15 +2,37 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Shade Process', {
-    refresh: function(frm) {
-          frm.set_query("service_item", function () {
+    refresh: function (frm) {
+        frm.set_query("service_item", function () {
             return {
                 filters: [
                     ["Item", "item_group", "=", "Services"]
                 ]
             };
         });
-    }
+
+        if (frm.doc.docstatus == 1) {
+            cur_frm.add_custom_button(__('New Quotation'), function () {
+                    frm.trigger("new_quotation");
+                },
+                __('Create'))
+        }
+
+    },
+	new_quotation: function(frm) {
+		frappe.call({
+			method: 'sayaab.dyeing.custom.new_quotation.new_quotation',
+			args: {
+				'source_name': frm.doc.name
+			},
+			callback: function(r) {
+				if (!r.exc) {
+					frappe.model.sync(r.message);
+					frappe.set_route("Form", r.message.doctype, r.message.name);
+				}
+			}
+		});
+	},
 
 });
 
@@ -22,7 +44,7 @@ function total_chemical_cost(frm) {
     });
     frm.set_value("chemical_cost", parseFloat(amount).toFixed(3))
     overhead_cost = frm.doc.overhead_cost || 0;
-    frm.set_value("grand_total",  (parseFloat(amount)+ parseFloat(overhead_cost)).toFixed(3))
+    frm.set_value("grand_total", (parseFloat(amount) + parseFloat(overhead_cost)).toFixed(3))
 }
 
 function total_overhead_cost(frm) {
@@ -33,19 +55,19 @@ function total_overhead_cost(frm) {
     });
     frm.set_value("overhead_cost", parseFloat(amount).toFixed(3))
     chemical_cost = frm.doc.chemical_cost || 0;
-    frm.set_value("grand_total",  (parseFloat(amount)+ parseFloat(chemical_cost)).toFixed(3))
+    frm.set_value("grand_total", (parseFloat(amount) + parseFloat(chemical_cost)).toFixed(3))
 }
 
 frappe.ui.form.on('Shade Process Item', {
     qty: function (frm, cdt, cdn) {
         var row = locals[cdt][cdn];
         frappe.model.set_value(cdt, cdn, 'amount', row.rate * row.qty);
-         total_chemical_cost(frm);
+        total_chemical_cost(frm);
     },
     rate: function (frm, cdt, cdn) {
         var row = locals[cdt][cdn];
         frappe.model.set_value(cdt, cdn, 'amount', row.rate * row.qty);
-         total_chemical_cost(frm);
+        total_chemical_cost(frm);
     }
 });
 
