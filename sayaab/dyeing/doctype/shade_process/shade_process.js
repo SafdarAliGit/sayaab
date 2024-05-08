@@ -3,6 +3,15 @@
 
 frappe.ui.form.on('Shade Process', {
     refresh: function (frm) {
+        frm.set_query("fabric", function () {
+            return {
+                filters: [
+                    ["Item", "item_group", "=", "Fabric"]
+                ]
+            };
+        });
+
+
         frm.set_query("service_item", function () {
             return {
                 filters: [
@@ -19,22 +28,41 @@ frappe.ui.form.on('Shade Process', {
         }
 
     },
-	new_quotation: function(frm) {
-		frappe.call({
-			method: 'sayaab.dyeing.custom.new_quotation.new_quotation',
-			args: {
-				'source_name': frm.doc.name
-			},
-			callback: function(r) {
-				if (!r.exc) {
-					frappe.model.sync(r.message);
-					frappe.set_route("Form", r.message.doctype, r.message.name);
-				}
-			}
-		});
-	},
+    new_quotation: function (frm) {
+        frappe.call({
+            method: 'sayaab.dyeing.custom.new_quotation.new_quotation',
+            args: {
+                'source_name': frm.doc.name
+            },
+            callback: function (r) {
+                if (!r.exc) {
+                    frappe.model.sync(r.message);
+                    frappe.set_route("Form", r.message.doctype, r.message.name);
+                }
+            }
+        });
+    },
 
 });
+
+frappe.ui.form.on('Shade Process Item', {
+    qty: function (frm, cdt, cdn) {
+        var row = locals[cdt][cdn];
+        frappe.model.set_value(cdt, cdn, 'amount', row.rate * row.qty);
+        total_chemical_cost(frm);
+    },
+    rate: function (frm, cdt, cdn) {
+        var row = locals[cdt][cdn];
+        frappe.model.set_value(cdt, cdn, 'amount', row.rate * row.qty);
+        total_chemical_cost(frm);
+    },
+    percentage: function (frm, cdt, cdn) {
+        var row = locals[cdt][cdn];
+        frappe.model.set_value(cdt, cdn, 'qty', (row.percentage / 100) * frm.doc.fabric_qty);
+        total_chemical_cost(frm);
+    }
+});
+
 
 function total_chemical_cost(frm) {
     var amount = 0;
@@ -57,19 +85,6 @@ function total_overhead_cost(frm) {
     chemical_cost = frm.doc.chemical_cost || 0;
     frm.set_value("grand_total", (parseFloat(amount) + parseFloat(chemical_cost)).toFixed(3))
 }
-
-frappe.ui.form.on('Shade Process Item', {
-    qty: function (frm, cdt, cdn) {
-        var row = locals[cdt][cdn];
-        frappe.model.set_value(cdt, cdn, 'amount', row.rate * row.qty);
-        total_chemical_cost(frm);
-    },
-    rate: function (frm, cdt, cdn) {
-        var row = locals[cdt][cdn];
-        frappe.model.set_value(cdt, cdn, 'amount', row.rate * row.qty);
-        total_chemical_cost(frm);
-    }
-});
 
 
 frappe.ui.form.on('Shade Process Account', {
