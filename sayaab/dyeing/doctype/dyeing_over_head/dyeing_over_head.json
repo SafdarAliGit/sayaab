@@ -1,0 +1,31 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-05-08 17:03:55.730870",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "ref_shade_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "ref_shade_no",
+   "fieldtype": "Select",
+   "label": "Ref Shade No",
+   "options": "\nLight\nMedium\nDark\nExtra Dark\nWhite Wash"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-05-08 17:03:55.730870",
+ "modified_by": "Administrator",
+ "module": "Dyeing",
+ "name": "Dyeing Over Head",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
