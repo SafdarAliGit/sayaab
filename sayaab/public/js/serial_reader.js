@@ -3,7 +3,7 @@ $(document).ready(function() {
     $(document).on('click', '.item-name', function() {
         // Call the server-side method to fetch the serial data
         $.ajax({
-            url: 'http://sayaab.cx:8000/api/method/sayaab.util.get_serial_data',
+            url: 'https://sayaab.thesmarterp.com/api/method/sayaab.util.get_serial_data',
             type: 'GET',
             success: function(response) {
                 if (response.message.status === 'success') {
