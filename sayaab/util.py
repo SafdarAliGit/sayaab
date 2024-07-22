@@ -1,7 +1,7 @@
 import serial
 import frappe
 
-SERIAL_PORT = 'COM3'  # Change this to your specific port
+SERIAL_PORT = 'COM4'  # Change this to your specific port
 BAUD_RATE = 9600
 
 def read_serial_data():
