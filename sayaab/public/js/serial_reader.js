@@ -1,25 +1,41 @@
-$(document).ready(function() {
-    // Attach a click event to elements with the class 'item-name'
-    $(document).on('click', '.item-name', function() {
-        // Call the server-side method to fetch the serial data
-        $.ajax({
-            url: 'https://sayaab.thesmarterp.com/api/method/sayaab.util.get_serial_data',
-            type: 'GET',
-            success: function(response) {
-                if (response.message.status === 'success') {
-                    // Find the input field you want to update
-                    // You can adjust the selector to match your specific input field
-                    var inputField = $('input[data-fieldname="qty"]');
-                    inputField.val(response.message.data);
+let port;
+let reader;
+let textDecoder;
 
-                    // alert('Weight data updated successfully.');
-                } else {
-                    alert('Failed to get weight data: ' + response.message.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                alert('An error occurred: ' + error);
+async function connectSerial() {
+    try {
+        // Request the port and open a connection.
+        port = await navigator.serial.requestPort();
+        await port.open({baudRate: 9600});
+
+        // Initialize text decoder
+        textDecoder = new TextDecoderStream();
+        const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+        reader = textDecoder.readable.getReader();
+        readSerialData();
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function readSerialData() {
+    while (true) {
+        try {
+            const {value, done} = await reader.read();
+            if (done) {
+                reader.releaseLock();
+                break;
             }
-        });
-    });
+            // Display the data in the input field
+            var inputField = $('input[data-fieldname="qty"]');
+            inputField.val(value);
+        } catch (error) {
+            console.error('Error reading data:', error);
+            break;
+        }
+    }
+}
+
+$('.item-name').on('click', function () {
+    connectSerial();
 });
