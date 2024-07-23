@@ -53,13 +53,14 @@
 //         console.log('Web Serial API is not supported in this browser.');
 //     }
 // });
+//
 
 $(document).ready(function () {
     if ('serial' in navigator) {
         let port;
         let reader;
         let textDecoder;
-        let readTimeout;
+        let closeTimeout;
 
         function reverseString(str) {
             return str.split('').reverse().join('');
@@ -67,6 +68,11 @@ $(document).ready(function () {
 
         async function connectSerial() {
             try {
+                // Check if port is already open and close it
+                if (port && port.readable) {
+                    await disconnectSerial();
+                }
+
                 // Request the port and open a connection
                 port = await navigator.serial.requestPort();
                 await port.open({ baudRate: 9600 });
@@ -78,9 +84,6 @@ $(document).ready(function () {
 
                 // Start reading data
                 readSerialData();
-
-                // Set a timeout to close the port after 2 seconds
-                readTimeout = setTimeout(disconnectSerial, 5000);
             } catch (error) {
                 console.log('Error:', error);
             }
@@ -101,6 +104,10 @@ $(document).ready(function () {
                     if (inputField.length) {
                         inputField.val(floatValue);
                     }
+
+                    // Set a timeout to close the port after 5 seconds
+                    clearTimeout(closeTimeout); // Clear any existing timeout
+                    closeTimeout = setTimeout(disconnectSerial, 5000);
                 } catch (error) {
                     console.log('Error reading data:', error);
                     break;
@@ -118,8 +125,7 @@ $(document).ready(function () {
                     await port.close();
                     port = null;
                 }
-                clearTimeout(readTimeout); // Clear the timeout
-                console.log('Serial port closed after 5 seconds');
+                console.log('Serial port closed');
             } catch (error) {
                 console.log('Error closing serial port:', error);
             }
@@ -127,6 +133,10 @@ $(document).ready(function () {
 
         $(document).on('click', '.item-name', function () {
             connectSerial();
+        });
+
+        $(window).on('beforeunload', function () {
+            disconnectSerial();
         });
     } else {
         console.log('Web Serial API is not supported in this browser.');
