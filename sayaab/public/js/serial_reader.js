@@ -80,7 +80,7 @@ $(document).ready(function () {
                 readSerialData();
 
                 // Set a timeout to close the port after 2 seconds
-                readTimeout = setTimeout(disconnectSerial, 3000);
+                readTimeout = setTimeout(disconnectSerial, 5000);
             } catch (error) {
                 console.log('Error:', error);
             }
@@ -119,7 +119,7 @@ $(document).ready(function () {
                     port = null;
                 }
                 clearTimeout(readTimeout); // Clear the timeout
-                console.log('Serial port closed after 2 seconds');
+                console.log('Serial port closed after 5 seconds');
             } catch (error) {
                 console.log('Error closing serial port:', error);
             }
