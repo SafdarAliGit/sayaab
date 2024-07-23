@@ -86,7 +86,7 @@ $(document).ready(function () {
                 readSerialData();
 
                 // Set a timeout to close the port after 5 seconds
-                closeTimeout = setTimeout(disconnectSerial, 5000);
+                // closeTimeout = setTimeout(disconnectSerial, 5000);
             } catch (error) {
                 console.log('Error:', error);
             }
