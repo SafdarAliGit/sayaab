@@ -84,6 +84,9 @@ $(document).ready(function () {
 
                 // Start reading data
                 readSerialData();
+
+                // Set a timeout to close the port after 5 seconds
+                closeTimeout = setTimeout(disconnectSerial, 5000);
             } catch (error) {
                 console.log('Error:', error);
             }
@@ -104,10 +107,6 @@ $(document).ready(function () {
                     if (inputField.length) {
                         inputField.val(floatValue);
                     }
-
-                    // Set a timeout to close the port after 5 seconds
-                    clearTimeout(closeTimeout); // Clear any existing timeout
-                    closeTimeout = setTimeout(disconnectSerial, 5000);
                 } catch (error) {
                     console.log('Error reading data:', error);
                     break;
@@ -125,6 +124,7 @@ $(document).ready(function () {
                     await port.close();
                     port = null;
                 }
+                clearTimeout(closeTimeout); // Clear the timeout
                 console.log('Serial port closed');
             } catch (error) {
                 console.log('Error closing serial port:', error);
