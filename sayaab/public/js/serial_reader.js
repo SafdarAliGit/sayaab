@@ -86,7 +86,7 @@ $(document).ready(function () {
                 readSerialData();
 
                 // Set a timeout to close the port after 5 seconds
-                // closeTimeout = setTimeout(disconnectSerial, 5000);
+                closeTimeout = setTimeout(disconnectSerial, 5000);
             } catch (error) {
                 console.log('Error:', error);
             }
@@ -103,9 +103,15 @@ $(document).ready(function () {
                     // Display the data in the input field
                     let reversedValue = reverseString(value.trim());
                     let floatValue = parseFloat(reversedValue);
-                    const inputField = $('input[data-fieldname="qty"]');
-                    if (inputField.length) {
-                        inputField.val(floatValue);
+                    const qtyField = $('input[data-fieldname="qty"]');
+                    if (qtyField.length) {
+                        qtyField.val(floatValue);
+
+                        // Focus on the input field with data-fieldname="uom"
+                        const uomField = $('input[data-fieldname="uom"]');
+                        if (uomField.length) {
+                            uomField.focus();
+                        }
                     }
                 } catch (error) {
                     console.log('Error reading data:', error);
