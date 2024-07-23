@@ -7,7 +7,6 @@ $(document).ready(function () {
         async function connectSerial() {
             try {
                 // Request the port and open a connection
-                alert("testing");
                 port = await navigator.serial.requestPort();
                 await port.open({baudRate: 9600});
 
