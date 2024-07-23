@@ -3,7 +3,9 @@ $(document).ready(function () {
         let port;
         let reader;
         let textDecoder;
-
+        function reverseString(str) {
+            return str.split('').reverse().join('');
+        }
         async function connectSerial() {
             try {
                 // Request the port and open a connection
@@ -31,9 +33,11 @@ $(document).ready(function () {
                         break;
                     }
                     // Display the data in the input field
+                    let reversedValue = reverseString(value.trim());
+                    let floatValue = parseFloat(reversedValue);
                     const inputField = $('input[data-fieldname="qty"]');
                     if (inputField.length) {
-                        inputField.val(value.trim());
+                        inputField.val(floatValue);
                     }
                 } catch (error) {
                     console.log('Error reading data:', error);
