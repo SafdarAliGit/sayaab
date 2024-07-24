@@ -183,14 +183,14 @@ $(document).ready(function () {
             }
         }
 
-        // $(document).on('click', '.item-name', function () {
-        //     if (port && port.readable) {
-        //         disconnectSerial(); // Close the port if it's open
-        //     } else {
-        //         connectSerial(); // Open the port if it's closed
-        //     }
-        // });
-        connectSerial();
+
+            if (port && port.readable) {
+                disconnectSerial(); // Close the port if it's open
+            } else {
+                connectSerial(); // Open the port if it's closed
+            }
+
+
         $(window).on('beforeunload', function () {
             disconnectSerial();
         });
