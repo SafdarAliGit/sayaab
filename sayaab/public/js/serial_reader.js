@@ -12,8 +12,14 @@ $(document).ready(function () {
             // Focus the field
             $field.focus();
 
-            // Set its value to the float value
-            $field.val(isNaN(floatValue) ? '' : floatValue);
+            // Set the field value to the float value
+            if (!isNaN(floatValue)) {
+                // Use a timeout to ensure the field is focused before setting the value
+                setTimeout(() => $field.val(floatValue), 0);
+            } else {
+                // Optionally, handle invalid float conversion
+                $field.val('');
+            }
         } catch (err) {
             console.error('Failed to read clipboard contents: ', err);
         }
