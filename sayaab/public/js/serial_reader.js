@@ -94,7 +94,6 @@ $(document).ready(function () {
         let reader;
         let textDecoder;
         let closeTimeout;
-        let focusTimeout;
 
         function reverseString(str) {
             return str.split('').reverse().join('');
@@ -109,7 +108,7 @@ $(document).ready(function () {
 
                 // Request the port and open a connection
                 port = await navigator.serial.requestPort();
-                await port.open({baudRate: 9600});
+                await port.open({ baudRate: 9600 });
 
                 // Initialize text decoder
                 textDecoder = new TextDecoderStream();
@@ -122,39 +121,36 @@ $(document).ready(function () {
                 // Set a timeout to close the port after 5 seconds
                 closeTimeout = setTimeout(disconnectSerial, 5000);
 
-                // Set a timeout to focus on the qty field after 5 seconds
-                focusTimeout = setTimeout(focusOnQtyField, 5000);
+                // Focus on the qty field after 5 seconds
+                setTimeout(focusOnQtyField, 5000);
             } catch (error) {
-                console.log('Error:', error);
+                console.error('Error connecting serial port:', error);
             }
         }
 
         async function readSerialData() {
             while (true) {
                 try {
-                    const {value, done} = await reader.read();
+                    const { value, done } = await reader.read();
                     if (done) {
                         reader.releaseLock();
                         break;
                     }
-                    // Process the data from the serial port
-                    let reversedValue = reverseString(value.trim());
-                    let floatValue = parseFloat(reversedValue);
-
-                    // Update the qty field
+                    // Process and update the data
+                    const reversedValue = reverseString(value.trim());
+                    const floatValue = parseFloat(reversedValue);
                     const qtyField = $('input[data-fieldname="qty"]');
                     if (qtyField.length) {
                         qtyField.val(floatValue);
                     }
                 } catch (error) {
-                    console.log('Error reading data:', error);
+                    console.error('Error reading data:', error);
                     break;
                 }
             }
         }
 
         function focusOnQtyField() {
-            // Focus on the input field with data-fieldname="qty"
             const qtyField = $('input[data-fieldname="qty"]');
             if (qtyField.length) {
                 qtyField.focus();
@@ -172,12 +168,19 @@ $(document).ready(function () {
                     port = null;
                 }
                 clearTimeout(closeTimeout); // Clear the timeout
-                clearTimeout(focusTimeout); // Clear the timeout
                 console.log('Serial port closed');
             } catch (error) {
-                console.log('Error closing serial port:', error);
+                console.error('Error closing serial port:', error);
             }
         }
+
+        // Attempt to reconnect to the serial port on page load
+        async function initializeConnection() {
+            await connectSerial();
+        }
+
+        // Reconnect when the page is loaded or reloaded
+        initializeConnection();
 
         $(document).on('click', '.item-name', function () {
             connectSerial();
@@ -190,3 +193,4 @@ $(document).ready(function () {
         console.log('Web Serial API is not supported in this browser.');
     }
 });
+
