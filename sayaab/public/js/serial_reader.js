@@ -127,7 +127,7 @@ $(document).ready(function () {
                 // Set a timeout to focus on the qty field after 5 seconds
                 focusTimeout = setTimeout(focusOnQtyField, 5000);
             } catch (error) {
-                console.log('Error:', error);
+                console.error('Error:', error);
             }
         }
 
@@ -149,7 +149,7 @@ $(document).ready(function () {
                         qtyField.val(floatValue);
                     }
                 } catch (error) {
-                    console.log('Error reading data:', error);
+                    console.error('Error reading data:', error);
                     break;
                 }
             }
@@ -165,10 +165,12 @@ $(document).ready(function () {
 
         async function disconnectSerial() {
             try {
+                // Ensure reader is properly released
                 if (reader) {
                     await reader.cancel();
                     await reader.releaseLock();
                 }
+                // Ensure port is properly closed
                 if (port) {
                     await port.close();
                     port = null;
@@ -177,7 +179,7 @@ $(document).ready(function () {
                 clearTimeout(focusTimeout); // Clear the timeout
                 console.log('Serial port closed');
             } catch (error) {
-                console.log('Error closing serial port:', error);
+                console.error('Error closing serial port:', error);
             }
         }
 
@@ -196,3 +198,4 @@ $(document).ready(function () {
         console.log('Web Serial API is not supported in this browser.');
     }
 });
+
