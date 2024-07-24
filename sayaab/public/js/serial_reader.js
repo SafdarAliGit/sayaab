@@ -183,14 +183,15 @@ $(document).ready(function () {
             }
         }
 
+        // Add a button to connect to the serial port
+        $('body').append('<button id="connect-serial">Connect to Serial Port</button>');
 
-            if (port && port.readable) {
-                disconnectSerial(); // Close the port if it's open
-            } else {
-                connectSerial(); // Open the port if it's closed
-            }
+        // Handle button click
+        $(document).on('click', '#connect-serial', function () {
+            connectSerial();
+        });
 
-
+        // Ensure the serial port is disconnected when the page is unloaded
         $(window).on('beforeunload', function () {
             disconnectSerial();
         });
@@ -198,4 +199,5 @@ $(document).ready(function () {
         console.log('Web Serial API is not supported in this browser.');
     }
 });
+
 
