@@ -120,7 +120,7 @@ $(document).ready(function () {
                 readSerialData();
 
                 // Set a timeout to close the port after 5 seconds
-                // closeTimeout = setTimeout(disconnectSerial, 5000);
+                closeTimeout = setTimeout(disconnectSerial, 5000);
 
                 // Set a timeout to focus on the qty field after 5 seconds
                 focusTimeout = setTimeout(focusOnQtyField, 5000);
