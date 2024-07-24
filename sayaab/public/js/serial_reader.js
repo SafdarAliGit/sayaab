@@ -94,6 +94,7 @@ $(document).ready(function () {
         let reader;
         let textDecoder;
         let closeTimeout;
+        let focusTimeout;
 
         function reverseString(str) {
             return str.split('').reverse().join('');
@@ -120,6 +121,9 @@ $(document).ready(function () {
 
                 // Set a timeout to close the port after 5 seconds
                 closeTimeout = setTimeout(disconnectSerial, 5000);
+
+                // Set a timeout to focus on the qty field after 5 seconds
+                focusTimeout = setTimeout(focusOnQtyField, 5000);
             } catch (error) {
                 console.log('Error:', error);
             }
@@ -133,23 +137,27 @@ $(document).ready(function () {
                         reader.releaseLock();
                         break;
                     }
-                    // Display the data in the input field
+                    // Process the data from the serial port
                     let reversedValue = reverseString(value.trim());
                     let floatValue = parseFloat(reversedValue);
+
+                    // Update the qty field
                     const qtyField = $('input[data-fieldname="qty"]');
                     if (qtyField.length) {
                         qtyField.val(floatValue);
-
-                        // Focus on the input field with data-fieldname="uom"
-                        const uomField = $('input[data-fieldname="uom"]');
-                        if (uomField.length) {
-                            uomField.focus();
-                        }
                     }
                 } catch (error) {
                     console.log('Error reading data:', error);
                     break;
                 }
+            }
+        }
+
+        function focusOnQtyField() {
+            // Focus on the input field with data-fieldname="qty"
+            const qtyField = $('input[data-fieldname="qty"]');
+            if (qtyField.length) {
+                qtyField.focus();
             }
         }
 
@@ -164,6 +172,7 @@ $(document).ready(function () {
                     port = null;
                 }
                 clearTimeout(closeTimeout); // Clear the timeout
+                clearTimeout(focusTimeout); // Clear the timeout
                 console.log('Serial port closed');
             } catch (error) {
                 console.log('Error closing serial port:', error);
