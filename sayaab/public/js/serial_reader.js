@@ -127,7 +127,6 @@ $(document).ready(function () {
             } catch (error) {
                 console.log('Error:', error);
             }
-
         }
 
         async function readSerialData() {
