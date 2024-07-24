@@ -55,9 +55,8 @@ frappe.ui.form.on('Invoice', {
                         let floatValue = parseFloat(reversedValue);
 
                         // Update the qty field
-                        const qtyField = frm.fields_dict['qty'].input;
-                        if (qtyField) {
-                            qtyField.value = floatValue;
+                        if (frm.fields_dict['qty']) {
+                            frm.set_value('qty', floatValue);
                         }
                     } catch (error) {
                         console.error('Error reading data:', error);
@@ -97,11 +96,9 @@ frappe.ui.form.on('Invoice', {
             // Connect to the serial port when the form is refreshed
             connectSerial();
 
-            // Ensure the serial port is disconnected when the form is closed
-            frm.on('onload', function () {
-                $(window).on('beforeunload', function () {
-                    disconnectSerial();
-                });
+            // Ensure the serial port is disconnected when the page is unloaded
+            $(window).on('beforeunload', function () {
+                disconnectSerial();
             });
         } else {
             console.log('Web Serial API is not supported in this browser.');
