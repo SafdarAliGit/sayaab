@@ -118,8 +118,8 @@ $(document).ready(function () {
                 // Start reading data
                 readSerialData();
 
-                // Set a timeout to close the port after 3 seconds
-                closeTimeout = setTimeout(disconnectSerial, 3000);
+                // Set a timeout to close the port after 5 seconds
+                closeTimeout = setTimeout(disconnectSerial, 5000);
             } catch (error) {
                 console.log('Error:', error);
             }
@@ -133,34 +133,23 @@ $(document).ready(function () {
                         reader.releaseLock();
                         break;
                     }
-                    // Process the data from the serial port
+                    // Display the data in the input field
                     let reversedValue = reverseString(value.trim());
                     let floatValue = parseFloat(reversedValue);
+                    const qtyField = $('input[data-fieldname="qty"]');
+                    if (qtyField.length) {
+                        qtyField.val(floatValue);
 
-                    // Copy to clipboard
-                    await navigator.clipboard.writeText(floatValue.toString());
-
-                    // Focus and paste in the qty field
-                    focusAndPasteValue();
+                        // Focus on the input field with data-fieldname="uom"
+                        const uomField = $('input[data-fieldname="uom"]');
+                        if (uomField.length) {
+                            uomField.focus();
+                        }
+                    }
                 } catch (error) {
                     console.log('Error reading data:', error);
                     break;
                 }
-                // Wait for 2 seconds before reading the next value
-                await new Promise(resolve => setTimeout(resolve, 2000));
-            }
-        }
-
-        function focusAndPasteValue() {
-            // Focus on the input field with data-fieldname="qty"
-            const qtyField = $('input[data-fieldname="qty"]');
-            if (qtyField.length) {
-                qtyField.focus();
-                qtyField.val(''); // Clear the field before pasting
-                // Paste the value from the clipboard
-                navigator.clipboard.readText().then(text => {
-                    qtyField.val(text);
-                });
             }
         }
 
