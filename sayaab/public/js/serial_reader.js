@@ -127,6 +127,7 @@ $(document).ready(function () {
             } catch (error) {
                 console.log('Error:', error);
             }
+            disconnectSerial();
         }
 
         async function readSerialData() {
@@ -183,9 +184,9 @@ $(document).ready(function () {
             connectSerial();
         });
 
-        // $(window).on('beforeunload', function () {
-        //     disconnectSerial();
-        // });
+        $(window).on('beforeunload', function () {
+            disconnectSerial();
+        });
     } else {
         console.log('Web Serial API is not supported in this browser.');
     }
