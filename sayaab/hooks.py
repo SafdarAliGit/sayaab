@@ -11,7 +11,7 @@ app_license = "MIT"
 # ------------------
 # include js, css files in header of desk.html
 # app_include_css = "/assets/sayaab/css/sayaab.css"
-app_include_js = "/assets/sayaab/js/serial_reader.js"
+# app_include_js = "/assets/sayaab/js/serial_reader.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/sayaab/css/sayaab.css"
@@ -21,14 +21,14 @@ app_include_js = "/assets/sayaab/js/serial_reader.js"
 # website_theme_scss = "sayaab/public/scss/website"
 
 # include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
+# webform_include_js = {"Invoice": "public/js/serial_reader.js"}
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 # page_js = {"point-of-sale" : "public/js/serial_reader.js"}
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Invoice" : "public/js/serial_reader.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
