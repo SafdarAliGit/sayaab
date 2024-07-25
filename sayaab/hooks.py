@@ -29,7 +29,7 @@ app_license = "MIT"
 # page_js = {"point-of-sale" : "public/js/serial_reader.js"}
 # include js in doctype views
 
-doctype_js = {"Invoice" : "public/js/serial_reader.js"}
+# doctype_js = {"Invoice" : "public/js/serial_reader.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
