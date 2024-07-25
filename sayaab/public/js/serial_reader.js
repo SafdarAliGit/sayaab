@@ -34,17 +34,20 @@ $(document).ready(function () {
                         reader.releaseLock();
                         break;
                     }
+
                     // Display the data in the input field
                     let reversedValue = reverseString(value.trim());
                     let floatValue = parseFloat(reversedValue);
                     const inputField = $('input[data-fieldname="qty"]');
+
                     if (inputField.length) {
                         inputField.val(floatValue);
 
-                        // Focus on the input field after 3 seconds
+                        // Focus on the input field and select its value after 4 seconds
                         setTimeout(() => {
                             inputField.focus();
-                        }, 3000);
+                            inputField.select();
+                        }, 4000);
                     }
                 } catch (error) {
                     console.log('Error reading data:', error);
