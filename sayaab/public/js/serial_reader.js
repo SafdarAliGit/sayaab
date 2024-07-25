@@ -31,62 +31,62 @@
 //
 // });
 
-// $(document).ready(function () {
-//     if ('serial' in navigator) {
-//         let port;
-//         let reader;
-//         let textDecoder;
-//         function reverseString(str) {
-//             return str.split('').reverse().join('');
-//         }
-//         async function connectSerial() {
-//             try {
-//                 // Request the port and open a connection
-//                 port = await navigator.serial.requestPort();
-//                 await port.open({baudRate: 9600});
-//
-//                 // Initialize text decoder
-//                 textDecoder = new TextDecoderStream();
-//                 const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
-//                 reader = textDecoder.readable.getReader();
-//
-//                 // Start reading data
-//                 readSerialData();
-//             } catch (error) {
-//                 console.log('Error:', error);
-//             }
-//         }
-//
-//         async function readSerialData() {
-//             while (true) {
-//                 try {
-//                     const {value, done} = await reader.read();
-//                     if (done) {
-//                         reader.releaseLock();
-//                         break;
-//                     }
-//                     // Display the data in the input field
-//                     let reversedValue = reverseString(value.trim());
-//                     let floatValue = parseFloat(reversedValue);
-//                     const inputField = $('input[data-fieldname="qty"]');
-//                     if (inputField.length) {
-//                         inputField.val(floatValue);
-//                     }
-//                 } catch (error) {
-//                     console.log('Error reading data:', error);
-//                     break;
-//                 }
-//             }
-//         }
-//
-//         $(document).on('click', '.item-name', function () {
-//             connectSerial();
-//         });
-//     } else {
-//         console.log('Web Serial API is not supported in this browser.');
-//     }
-// });
-//
+$(document).ready(function () {
+    if ('serial' in navigator) {
+        let port;
+        let reader;
+        let textDecoder;
+        function reverseString(str) {
+            return str.split('').reverse().join('');
+        }
+        async function connectSerial() {
+            try {
+                // Request the port and open a connection
+                port = await navigator.serial.requestPort();
+                await port.open({baudRate: 9600});
+
+                // Initialize text decoder
+                textDecoder = new TextDecoderStream();
+                const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+                reader = textDecoder.readable.getReader();
+
+                // Start reading data
+                readSerialData();
+            } catch (error) {
+                console.log('Error:', error);
+            }
+        }
+
+        async function readSerialData() {
+            while (true) {
+                try {
+                    const {value, done} = await reader.read();
+                    if (done) {
+                        reader.releaseLock();
+                        break;
+                    }
+                    // Display the data in the input field
+                    let reversedValue = reverseString(value.trim());
+                    let floatValue = parseFloat(reversedValue);
+                    const inputField = $('input[data-fieldname="qty"]');
+                    if (inputField.length) {
+                        inputField.val(floatValue);
+                    }
+                } catch (error) {
+                    console.log('Error reading data:', error);
+                    break;
+                }
+            }
+        }
+
+        $(document).on('click', '.item-name', function () {
+            connectSerial();
+        });
+    } else {
+        console.log('Web Serial API is not supported in this browser.');
+    }
+});
+
 
 // $(document).ready(function () {
 //     if ('serial' in navigator) {
@@ -200,43 +200,43 @@
 //     }
 // });
 
-
-async function readFromSerialPort() {
-    try {
-        // Replace with your actual serial port reading function
-        let serialPortData = await getSerialPortData();
-
-        // Use dummy data if no data is received
-        if (!serialPortData || serialPortData.trim() === '') {
-            serialPortData = '00.00';
-        } else {
-            // Reverse the data horizontally
-            let reversedData = serialPortData.split('').reverse().join('');
-
-            // Convert to float
-            let floatValue = parseFloat(reversedData);
-
-            // Ensure the value is a valid number and format it
-            floatValue = isNaN(floatValue) ? 0.00 : floatValue.toFixed(2);
-
-            serialPortData = floatValue;
-        }
-
-        // Assign to data-fieldname="qty"
-        $('[data-fieldname="qty"]').val(serialPortData);
-    } catch (err) {
-        console.error('Error reading from serial port:', err);
-        // Set dummy data in case of error
-        $('[data-fieldname="qty"]').val('00.00');
-    }
-}
-
-$(document).ready(function () {
-    readFromSerialPort();
-});
-
-// Placeholder function to simulate serial port data fetching
-async function getSerialPortData() {
-    // Simulate no data received
-    return new Promise(resolve => setTimeout(() => resolve('00.00'), 1000));
-}
+//
+// async function readFromSerialPort() {
+//     try {
+//         // Replace with your actual serial port reading function
+//         let serialPortData = await getSerialPortData();
+//
+//         // Use dummy data if no data is received
+//         if (!serialPortData || serialPortData.trim() === '') {
+//             serialPortData = '00.00';
+//         } else {
+//             // Reverse the data horizontally
+//             let reversedData = serialPortData.split('').reverse().join('');
+//
+//             // Convert to float
+//             let floatValue = parseFloat(reversedData);
+//
+//             // Ensure the value is a valid number and format it
+//             floatValue = isNaN(floatValue) ? 0.00 : floatValue.toFixed(2);
+//
+//             serialPortData = floatValue;
+//         }
+//
+//         // Assign to data-fieldname="qty"
+//         $('[data-fieldname="qty"]').val(serialPortData);
+//     } catch (err) {
+//         console.error('Error reading from serial port:', err);
+//         // Set dummy data in case of error
+//         $('[data-fieldname="qty"]').val('00.00');
+//     }
+// }
+//
+// $(document).ready(function () {
+//     readFromSerialPort();
+// });
+//
+// // Placeholder function to simulate serial port data fetching
+// async function getSerialPortData() {
+//     // Simulate no data received
+//     return new Promise(resolve => setTimeout(() => resolve('00.00'), 1000));
+// }
