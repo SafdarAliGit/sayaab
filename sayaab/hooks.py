@@ -199,4 +199,7 @@ page_js = {"point-of-sale" : "public/js/serial_reader.js"}
 # auth_hooks = [
 #	"sayaab.auth.validate"
 # ]
+app_include_css = [
+    "/assets/sayaab/css/invoice.css"
+]
 required_apps = ["erpnext"]

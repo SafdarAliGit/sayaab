@@ -7,35 +7,16 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "item",
-  "rate",
-  "qty",
-  "amount",
-  "amended_from"
+  "quantity",
+  "column_break_tli7z",
+  "customer",
+  "amended_from",
+  "invoice_item",
+  "grand_total",
+  "paid_amount",
+  "to_be_paid"
  ],
  "fields": [
-  {
-   "fieldname": "item",
-   "fieldtype": "Link",
-   "label": "Item",
-   "options": "Item"
-  },
-  {
-   "default": "3",
-   "fieldname": "rate",
-   "fieldtype": "Currency",
-   "label": "Rate"
-  },
-  {
-   "fieldname": "qty",
-   "fieldtype": "Float",
-   "label": "Qty"
-  },
-  {
-   "fieldname": "amount",
-   "fieldtype": "Currency",
-   "label": "Amount"
-  },
   {
    "fieldname": "amended_from",
    "fieldtype": "Link",
@@ -44,12 +25,55 @@
    "options": "Invoice",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "default": "Walking Customer",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "invoice_item",
+   "fieldtype": "Table",
+   "label": "Invoice Item",
+   "options": "Invoice Item"
+  },
+  {
+   "default": "0",
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount"
+  },
+  {
+   "default": "0",
+   "fieldname": "to_be_paid",
+   "fieldtype": "Currency",
+   "label": "To Be Paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tli7z",
+   "fieldtype": "Column Break"
   }
  ],
+ "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-24 15:42:43.467294",
+ "modified": "2024-08-06 10:57:00.091994",
  "modified_by": "Administrator",
  "module": "Sayaab",
  "name": "Invoice",
@@ -68,6 +92,7 @@
    "write": 1
   }
  ],
+ "show_preview_popup": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
